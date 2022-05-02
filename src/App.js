@@ -13,6 +13,9 @@ function App() {
       <h1>{state.count}</h1>
         <Button onClick={() => dispatch(increaseCounter(10))}>Increase Count</Button>
         <Button onClick={() => dispatch(decreaseCounter(10))}>Decrease Count</Button>
+
+
+
     </div>
   );
 }

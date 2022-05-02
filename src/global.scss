@@ -1,0 +1,14 @@
+$primary-color: #83a39e;
+$secondary-color: #f1d19e;
+
+@mixin flex-col {
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+
+@mixin flex-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row
+}
