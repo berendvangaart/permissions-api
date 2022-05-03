@@ -13,7 +13,6 @@ const Dashboard = () => {
         if (!state.user) history.push("/");
     }, [state])
 
-
     return (
         <div className={css.container}>
             <Sidebar/>

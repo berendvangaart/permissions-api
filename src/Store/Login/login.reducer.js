@@ -10,13 +10,13 @@ const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGIN:
             return {
-                ...state,
                 token: action.payload.token,
                 user: action.payload.user
             };
         case LOGOUT:
             return {
-                INITIAL_STATE
+                token: INITIAL_STATE.token,
+                user: INITIAL_STATE.user
             };
         default:
             return state;

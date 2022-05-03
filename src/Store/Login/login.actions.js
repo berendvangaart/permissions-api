@@ -7,7 +7,7 @@ export const signIn = (credentials) => {
     };
 };
 
-export const signOut = () => {
+export const logOut = () => {
     return {
         type: LOGOUT,
         payload: ''
