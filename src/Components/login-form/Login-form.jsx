@@ -8,6 +8,11 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const state = useSelector((state) => state)
 
+    const handleLogin = () => {
+      // todo dispatch login action
+        console.log('click login')
+    }
+
     return (
         <div className={css.container}>
             <Form>
@@ -20,7 +25,7 @@ const LoginForm = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Button variant="primary" >
+                <Button variant="primary" onClick={handleLogin}>
                     Submit
                 </Button>
             </Form>

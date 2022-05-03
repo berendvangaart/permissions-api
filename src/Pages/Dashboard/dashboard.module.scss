@@ -1,0 +1,6 @@
+@import "src/global";
+
+.container {
+  @include flex-row;
+  align-items: flex-start;
+}
