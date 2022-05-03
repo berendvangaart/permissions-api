@@ -9,13 +9,16 @@ const LoginForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const state = useSelector((state) => state.login)
+
     const [invalid, setInvalid] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleLogin = async () => {
         const res = await fetch(`${process.env.REACT_APP_API_URL}login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email: 'admin@admin.nl', password: 'test123'})
+            body: JSON.stringify({email: email, password: password})
         });
 
         if (res.status === 200) {
@@ -25,6 +28,10 @@ const LoginForm = () => {
         }
         if (res.status === 401) setInvalid(true)
     }
+
+    const handleMailChange = (e) => setEmail(e.target.value)
+
+    const handlePasswordChange = (e) => setPassword(e.target.value)
 
     useEffect(() => {
         if (state.user)
@@ -37,24 +44,24 @@ const LoginForm = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     {invalid ?
-                        (<Form.Control type="email" placeholder="Enter email" required isInvalid/>) :
-                        (<Form.Control type="email" placeholder="Enter email"/>)
+                        (<Form.Control onChange={handleMailChange} type="email" placeholder="Enter email" required isInvalid/>) :
+                        (<Form.Control onChange={handleMailChange} type="email" placeholder="Enter email"/>)
                     }
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     {invalid ?
-                        (<><Form.Control type="password" placeholder="Password" required isInvalid/>
+                        (<>
+                            <Form.Control onChange={handlePasswordChange} type="password" placeholder="Password" required isInvalid/>
                             <Form.Control.Feedback type="invalid">
                                 wrong username or password
-                            </Form.Control.Feedback></>) :
-                        (<Form.Control type="password" placeholder="Password"/>)}
+                            </Form.Control.Feedback>
+                        </>) :
+                        (<Form.Control onChange={handlePasswordChange} type="password" placeholder="Password"/>)}
                 </Form.Group>
 
-                <Button variant="primary" onClick={handleLogin}>
-                    Submit
-                </Button>
+                <Button variant="primary" onClick={handleLogin}> Log in </Button>
             </Form>
         </div>
     );
