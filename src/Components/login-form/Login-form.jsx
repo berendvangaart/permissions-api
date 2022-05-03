@@ -14,15 +14,16 @@ const LoginForm = () => {
     const handleLogin = async () => {
         const res = await fetch(`${process.env.REACT_APP_API_URL}login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({email: 'admin@admin.nl', password: 'test1223' })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: 'admin@admin.nl', password: 'test123'})
         });
 
-        if(res.status === 200) {
+        if (res.status === 200) {
+            setInvalid(false)
             dispatch(signIn(await res.json()))
             history.push("/dashboard");
         }
-        if(res.status === 401) setInvalid(true)
+        if (res.status === 401) setInvalid(true)
     }
 
     useEffect(() => {
@@ -35,13 +36,34 @@ const LoginForm = () => {
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control  type="email" placeholder="Enter email" />
+                    {invalid ?
+                        (<Form.Control type="email" placeholder="Enter email" required isInvalid/>) :
+                        (<Form.Control type="email" placeholder="Enter email"/>)
+                    }
+
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    {invalid ?
+                        (<><Form.Control type="password" placeholder="Password" required isInvalid/>
+                            <Form.Control.Feedback type="invalid">
+                                wrong username or password
+                            </Form.Control.Feedback></>) :
+                        (<Form.Control type="password" placeholder="Password"/>)}
+
+
                 </Form.Group>
+
+
+                {/*<InputGroup hasValidation>*/}
+                {/*    <InputGroup.Text>@</InputGroup.Text>*/}
+                {/*    <Form.Control type="text" required isInvalid />*/}
+                {/*    <Form.Control.Feedback type="invalid">*/}
+                {/*        Please choose a username.*/}
+                {/*    </Form.Control.Feedback>*/}
+                {/*</InputGroup>*/}
+
                 <Button variant="primary" onClick={handleLogin}>
                     Submit
                 </Button>
