@@ -1,10 +1,8 @@
 import {LOGIN, LOGOUT} from "./login.types";
 
 const INITIAL_STATE = {
-    role: null,
-    email: '',
-    loginSucces: false,
-    wrongCredentials: false
+    token : null,
+    user: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -13,10 +11,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         case LOGIN:
             return {
                 ...state,
+                token: action.payload.token,
+                user: action.payload.user
             };
         case LOGOUT:
             return {
-                ...state,
+                INITIAL_STATE
             };
         default:
             return state;
